@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site para Postar Vídeo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: azure;
+      margin: 0;
+      padding: 0;
+      background-color: #533500;
+    }
+    header {
+      background: #4a4a30;
+      text-align: center;
+      padding: 20px;
+    }
+    h3 {
+      font-family: gótica;
+      width: 100%;
+      text-align: center;
+      color: #f0f090;
+      margin: 0;  
+    }
+    .lista-link {
+      margin-bottom: 20px;
+    }
+    ul {
+      display: flex;
+      justify-content: center;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f090;
+      border-radius: 15px;
+    }
+    li a {
+      display: block;
+      color: #000;
+      padding: 8px 16px;
+      text-decoration: none;
+    }
+    li a:hover {
+      background-color: palevioletred;
+      color: white;
+      border-radius: 30px;
+    }
+    button {
+      padding: 5px 10px;
+      border-radius: 5px;
+      background-color: cornflowerblue;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: pink;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+    .form-container {
+      flex: 1;
+      max-width: 500px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: inherit;
+      gap: 10px;     
+      margin-left: 40px;   
+
+    }
+
+    .aside {
+      flex: 1;
+      background-color: lavender;
+      padding: 10px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 300px;
+    }
+    .video-box {
+      background-color: white;
+      padding: 10px;
+      border-radius: 10px;
+      min-height: 200px;
+    }
+    .embed-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* Proporção 16:9 */
+  height: 0;
+  overflow: hidden;
+}
+
+.embed-container iframe,
+.embed-container embed,
+.embed-container object {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+    .comment {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      animation: fadeIn 0.5s;
+      margin-left: 10px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .comment-author {
+      font-weight: bold;
+      color: cornflowerblue;
+    }
+    .comment-date {
+      font-size: 0.8em;
+      color: #ccc;
+    }
+    .comment-text {
+      margin-top: 10px;
+      margin-left: 19px;
+    }
+    input, textarea {
+      width: 90%;
+      padding: 5px;
+      margin-bottom: 8px;
+      border-radius: 5px;
+      border: none;
+    }
+    .section-medieval {
+      background-color: #4a4a30;
+      padding: 10px;
+      border-radius: 10px;
+      margin: 20px;
+    }
+    footer {
+      background-color: lightgray;
+      padding: 10px;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+    }
+    th {
+      text-align: right;
+      padding-right: 10px;
+      width: 30%;
+    }
+    td {
+      padding: 5px 0;
+    }
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .form-container, .aside {
+        max-width: 100%;
+      }
+    }
+
+    */
+#footer {
+    clear:both;
+    text-align: center ;
+    padding: 15px ;
+    background: #ffffff ;
+    color: black;
+}
+
+/* Media Queries para tablets */
+@media (min-width: 768px) {
+    #content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    #posts {
+        width: 68%;
+    }
+    
+    #right-side {
+        width: 30%;
+        margin-top: 0;
+    }
+}
+
+/* Media Queries para desktop */
+@media (min-width: 992px) {
+    #header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 50px;
+    }
+    
+    #menu {
+        margin-top: 0;
+    }
+    
+    #content {
+        padding: 20px 50px;
+    }
+}
+
+/* Melhorias para mobile */
+@media (max-width: 767px) {
+    #logo h1 {
+        font-size: 2em;
+    }
+    
+    #menu a {
+        padding: 8px;
+        font-size: 0.9em;
+    }
+    
+    .post {
+        padding: 15px;
+    }
+    
+    .content-right {
+        padding: 15px;
+    }
+}
+.png {
+    image-resolution: 1 x 1;
+    width: 1%;
+  display: flex;
+  
+}
+.embed-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* Proporção 16:9 */
+  height: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.embed-container iframe,
+.embed-container embed,
+.embed-container object {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Vídeos que eu quero ver</h1>
+    <section class="lista-link">
+      <ul>
+        <li><a href="google.com">Google</a></li>
+        <li><a href="Facebook.com">Facebook</a></li>
+        <li><a href="Twitter.com">Twitter</a></li>
+        <li><a href="linkedin.com">Linkedin</a></li>
+        <li><a href="orkut.com">Orkut</a></li>
+      </ul>
+    </section>
+  </header>
+
+  <main class="container">
+
+    <section class="form-container">
+      <form id="commentForm">
+        <h2>O que você achou?</h2>
+        <table>
+          <tr>
+            <th><label for="nome">Nome</label></th>
+            <td><input type="text" id="nome" required></td>
+          </tr>
+          <tr>
+            <th><label for="email">Email</label></th>
+            <td><input type="email" id="email" required></td>
+          </tr>
+          <tr>
+            <th><label for="msg">Comentário</label></th>
+            <td><textarea id="msg" rows="5" required></textarea></td>
+          </tr>
+          <tr>
+            <td colspan="2"><input type="submit" value="Enviar Comentário"></td>
+          </tr>
+        </table>
+      </form>
+    </section>   
+
+    <aside class="aside">
+      <div class="video-box">
+        <p>Insira aqui o código embed do vídeo 1:</p>
+        <textarea id="embedInput1" rows="4" placeholder="Cole aqui seu código embed"></textarea>
+        <button onclick="inserirEmbed(1)">Inserir Vídeo 1</button>
+        <div id="embedContainer1" class="embed-container" ></div>
+      </div>
+      <div class="video-box">
+        <p>Insira aqui o código embed do vídeo 2:</p>
+        <textarea id="embedInput2" rows="4" placeholder="Cole aqui seu código embed"></textarea>
+        <button onclick="inserirEmbed(2)">Inserir Vídeo 2</button>
+        <div id="embedContainer2" class="embed-container"></div>
+      </div>
+      
+    </aside>
+    
+
+  </main>
+
+  <!-- Área dos Comentários Armazenados -->
+  <div class="form-container" id="commentsSection" style="margin-left: 100px;">
+    <h2>Comentários Salvos no Site:</h2>
+  </div>
+  <table><th>Videos</th>
+    <tr><td><aside class="aside">
+      <div class="video-box">
+        <p>Insira aqui o código embed do vídeo 3:</p>
+        <textarea id="embedInput3" rows="4" placeholder="Cole aqui seu código embed"></textarea>
+        <button onclick="inserirEmbed(3)">Inserir Vídeo 3</button>
+        <div id="embedContainer3" class="embed-container"></div>
+      </div>
+      <div class="video-box">
+        <p>Insira aqui o código embed do vídeo 4:</p>
+        <textarea id="embedInput4" rows="4" placeholder="Cole aqui seu código embed"></textarea>
+        <button onclick="inserirEmbed(4)">Inserir Vídeo 4</button>
+        <div id="embedContainer4" class="embed-container"></div>
+      </div>      
+    </aside></td>
+  <td><aside class="aside">
+      <div class="video-box">
+        <p>Insira aqui o código embed do vídeo 5:</p>
+        <textarea id="embedInput5" rows="4" placeholder="Cole aqui seu código embed"></textarea>
+        <button onclick="inserirEmbed(5)" >Inserir Vídeo 5</button>
+        <div id="embedContainer5" class="embed-container"></div>
+      </div>
+      <div class="video-box">
+        <p>Insira aqui o código embed do vídeo 6:</p>
+        <textarea id="embedInput6" rows="4" placeholder="Cole aqui seu código embed"></textarea>
+        <button onclick="inserirEmbed(6)">Inserir Vídeo 6</button>
+        <div id="embedContainer6" class="embed-container"></div>
+      </div>      
+    </aside></td>
+  <td><aside class="aside">
+      <div class="video-box">
+        <p>Insira aqui o código embed do vídeo 7:</p>
+        <textarea id="embedInput7" rows="4" placeholder="Cole aqui seu código embed"></textarea>
+        <button onclick="inserirEmbed(7)">Inserir Vídeo 7</button>
+        <div id="embedContainer7" class="embed-container"></div>
+      </div>
+      <div class="video-box">
+        <p>Insira aqui o código embed do vídeo 8:</p>
+        <textarea id="embedInput8" rows="4" placeholder="Cole aqui seu código embed"></textarea>
+        <button onclick="inserirEmbed(8)">Inserir Vídeo 8</button>
+        <div id="embedContainer8" class="embed-container"></div>
+      </div>      
+    </aside></td></tr>
+   
+  </table>
+
+  <!-- Section Medieval antes do rodapé -->
+  <div class="section-medieval">
+    <h3 style="font-family: gótiga;" >Section Medieval</h3>
+    <aside><p style="font-size: 16;">Cultura medieval das cruzadas com cavalos, disputada na Europa a seculos cultura de premiação.</p>
+    <img src="images/cavaleiros-medievais-em-cavalos-batalha-137725466.webp" width="474 height="474" ></aside><br><br><br>
+    <gap style="size: 30px; top: 30px;"></gap>
+    <aside><p>Mais texto para decorar a seção medieval.</p>
+    <img src="images/OIP.jpeg"></aside>
+
+  </div>
+  
+  
+  <footer style="color: #533500;">
+    <section class="png">
+    <a href=""><img src="images/whats.png"></a>
+    <a href=""><img src="images/mail.png"></a>
+    <a href=""><img src="images/localiza.png" alt=""></a>
+    </section>
+    <p>Entre wm contato:</p>
+    <p>Email: c.wagner.oliveira@gmail.com</p>
+      Direitos Reservados de : Carlos Wagner Lemos de Oliveira
+    </p>
+  </footer>
+
+
+<script>
+  function inserirEmbed(numero) {
+  const embedInput = document.getElementById(`embedInput${numero}`);
+  const embedContainer = document.getElementById(`embedContainer${numero}`);
+  
+  const embedCode = embedInput.value.trim();
+  
+  if (embedCode !== "") {
+    embedContainer.innerHTML = embedCode;
+  } else {
+    embedContainer.innerHTML = "<p style='color: red;'>Por favor, insira um código embed válido.</p>";
+  }
+}
+ 
+  const nomeInput = document.getElementById('nome');
+  const msgInput = document.getElementById('msg');
+  const exibirNome = document.getElementById('exibirNome');
+  const comment = document.getElementById('comment');
+
+  nomeInput.addEventListener('input', () => {
+    exibirNome.textContent = nomeInput.value;
+  });
+  msgInput.addEventListener('input', () => {
+    comment.textContent = msgInput.value;
+  });
+
+  // Comentários armazenados
+  document.addEventListener('DOMContentLoaded', () => {
+    const commentForm = document.getElementById('commentForm');
+    const commentsSection = document.getElementById('commentsSection');
+
+    loadComments();
+
+    commentForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nome = nomeInput.value;
+      const email = document.getElementById('email').value;
+      const msg = msgInput.value;
+
+      addComment(nome, email, msg);
+      saveComment(nome, email, msg);
+      commentForm.reset();
+      exibirNome.textContent = '---';
+      comment.textContent = '---';
+    });
+
+    function addComment(nome, email, msg) {
+      const commentDiv = document.createElement('div');
+      commentDiv.className = 'comment';
+      const dateStr = new Date().toLocaleString();
+      commentDiv.innerHTML = `
+        <div class="comment-author">${nome}</div>
+        <div class="comment-date">${dateStr}</div>
+        <div class="comment-text">${msg}</div>
+      `;
+      commentsSection.appendChild(commentDiv);
+    }
+
+    function saveComment(nome, email, msg) {
+      const comments = JSON.parse(localStorage.getItem('comments')) || [];
+      comments.push({
+        nome,
+        email,
+        msg,
+        date: new Date().toISOString()
+      });
+      localStorage.setItem('comments', JSON.stringify(comments));
+    }
+
+    function loadComments() {
+      const comments = JSON.parse(localStorage.getItem('comments')) || [];
+      comments.forEach(c => {
+        addComment(c.nome, c.email, c.msg);
+      });
+    }
+  });
+  function inserirEmbed(numero) {
+  const embedInput = document.getElementById(`embedInput${numero}`);
+  const embedContainer = document.getElementById(`embedContainer${numero}`);
+  
+  const embedCode = embedInput.value;
+  
+  if (embedCode.trim() !== "") {
+    embedContainer.innerHTML = embedCode;
+  } else {
+    embedContainer.innerHTML = "<p style='color: red;'>Por favor, insira um código embed válido.</p>";
+  }
+}
+</script>
+</body>
+</html>
