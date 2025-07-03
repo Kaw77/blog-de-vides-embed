@@ -491,5 +491,19 @@
   }
 }
 </script>
+  <script>
+  window.onload = function () {
+    const isIE = !!document.documentMode;
+
+    if (!isIE) {
+      document.body.innerHTML = `
+        <div style="padding: 20px; background: black; color: red; font-size: 20px; text-align: center;">
+          🚫 Este site funciona apenas no navegador <strong>Internet Explorer</strong>.
+        </div>
+      `;
+      document.title = "Navegador não suportado";
+    }
+  };
+</script>
 </body>
 </html>
